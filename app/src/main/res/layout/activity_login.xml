@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    tools:context=".LoginActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/icon1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/username_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_edit"
+        android:textColorHint="@color/login_form_detail"
+        android:hint="Email Address"
+        android:padding="16dp"
+        android:textColor="#fff"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/password_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_edit"
+        android:hint="Password"
+        android:textColorHint="@color/login_form_detail"
+        android:textColor="#fff"
+        android:drawableRight="@drawable/ic_eye"
+        android:padding="16dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/username_login" />
+
+    <Button
+        android:paddingLeft="10dp"
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/password_login"
+        android:text="Login Now"
+        android:background="@drawable/bg_btn"
+        android:textAllCaps="false"
+        android:textColor="@color/login_form_detail"
+        android:drawableLeft="@drawable/ic_key"/>
+
+    <TextView
+        android:id="@+id/forgot_password_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot password?"
+        android:textColor="@color/login_form_detail"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        android:layout_marginTop="16dp"/>
+
+    <View
+        android:id="@+id/footer_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="50dp"
+        android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/text_noacc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account?"
+        app:layout_constraintTop_toBottomOf="@id/footer_line"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/text_signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/login_form_detail"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/facebook_login"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Facebook"-->
+<!--        android:textColor="@color/login_form_detail"-->
+<!--        app:layout_constraintStart_toStartOf="@id/guideline_left"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/guideline_right"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/footer_line"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:drawableStart="@drawable/s25r72"-->
+<!--        android:drawablePadding="4dp"/>-->
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="Sign In"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@id/footer_line"
+        app:layout_constraintEnd_toStartOf="@id/btn_googleLogin"
+        app:layout_constraintStart_toStartOf="@id/guideline_left" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_googleLogin"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+
+        app:layout_constraintTop_toTopOf="@id/facebook_login"
+        app:layout_constraintBottom_toBottomOf="@id/facebook_login"
+        app:layout_constraintStart_toEndOf="@id/facebook_login"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/login_form_detail_medium"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/forgot_password_text"
+        app:layout_constraintBottom_toTopOf="@id/facebook_login"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@id/text_or"/>
+
+    <TextView
+        android:id="@+id/text_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or continue with"
+        android:textColor="@color/login_form_detail"
+        android:textSize="12sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/line1"
+        app:layout_constraintTop_toTopOf="@id/line1"
+        app:layout_constraintStart_toEndOf="@id/line1"
+        app:layout_constraintEnd_toStartOf="@id/line2"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/login_form_detail_medium"
+        app:layout_constraintBottom_toBottomOf="@id/text_or"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toEndOf="@id/text_or"
+        app:layout_constraintTop_toTopOf="@id/text_or"/>
+
+    <TextView
+        android:id="@+id/text_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/text_noacc"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toTopOf="@id/text_noacc"
+        app:layout_constraintBottom_toBottomOf="@id/text_noacc"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        android:text="Create Account"
+        android:textStyle="bold"
+        android:textColor="@color/login_form_detail"
+        android:onClick="signUp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1011489635492",
+    "firebase_url": "https://sein-ta-lone-kids-tv.firebaseio.com",
+    "project_id": "sein-ta-lone-kids-tv",
+    "storage_bucket": "sein-ta-lone-kids-tv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011489635492:android:142cdbd8e469dcef5afa31",
+        "android_client_info": {
+          "package_name": "com.minthang.seintalonekidstv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011489635492-ofht8h2bh4hf7patvcspn0039qgbaj52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minthang.seintalonekidstv",
+            "certificate_hash": "c5ddb3f01dff671f81ed880e6b64d6c1cf049ee0"
+          }
+        },
+        {
+          "client_id": "1011489635492-374t06ruv0kkm9ed0nb8mdvevnejj4ur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5wz87_BDhkZoExCuz6IVl-OpNTDTiBC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011489635492-374t06ruv0kkm9ed0nb8mdvevnejj4ur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
