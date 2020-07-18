@@ -38,13 +38,18 @@ class HomeFragment : Fragment() {
 
         var storyCardView: CardView = root.findViewById(R.id.kids_story)
         storyCardView.setOnClickListener(){
-            startAct(this.requireContext())
+            var intent: Intent = Intent(root.context, StoryActivity::class.java)
+            intent.putExtra("cardId", "Stories")
+            startActivity(intent)
+        }
+
+        var engCardView: CardView = root.findViewById(R.id.learn_english)
+        engCardView.setOnClickListener(){
+            var intent: Intent = Intent(root.context, StoryActivity::class.java)
+            intent.putExtra("cardId", "English")
+            startActivity(intent)
         }
 
         return root
-    }
-
-    private fun startAct(ctx: Context){
-        startActivity(Intent(ctx, StoryActivity::class.java))
     }
 }

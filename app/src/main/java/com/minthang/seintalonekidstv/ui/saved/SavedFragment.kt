@@ -47,14 +47,12 @@ class SavedFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
 
-                Toast.makeText(context, "Some thing has changed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SavedFragment.context, "Some thing has changed", Toast.LENGTH_SHORT).show()
+                list.clear()
                 for(ds in dataSnapshot.children){
                     val item = videoListData(this@SavedFragment.requireActivity().application, ds.child("title").value.toString(), ds.child("link").value.toString())
                     list.add(item)
                 }
-                myrecyclerview.adapter = adapter
-                myrecyclerview.layoutManager = LinearLayoutManager(context)
-                myrecyclerview.setHasFixedSize(true)
                 adapter.notifyDataSetChanged()
             }
 

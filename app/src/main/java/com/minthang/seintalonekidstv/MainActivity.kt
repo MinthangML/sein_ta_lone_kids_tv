@@ -3,6 +3,9 @@ package com.minthang.seintalonekidstv
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -21,9 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         toolbar.title = "MainActivity"
+        toolbar.visibility = View.INVISIBLE
         navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController)
     }

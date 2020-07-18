@@ -13,12 +13,12 @@
 
 
     <color name="first_color">#4759ee</color>
-    <color name="second_color">#82b817</color>
-    <color name="third_color">#f8b94e</color>
-    <color name="fourth_color">#ec6900</color>
+    <color name="second_color">#05A63D</color>
+    <color name="third_color">#F2B807</color>
+    <color name="fourth_color">#F29F05</color>
     <color name="fifth_color">#6b57fd</color>
     <color name="sixth_color">#ec4989</color>
-    <color name="seventh_color">#2566b7</color>
+    <color name="seventh_color">#D75610</color>
     <color name="eight_color">#4ad090</color>
 
 </resources>

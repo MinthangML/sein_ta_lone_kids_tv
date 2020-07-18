@@ -16,4 +16,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="StoryAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/eight_color</item>
+        <item name="colorPrimaryDark">#02A513</item>
+        <item name="colorAccent">@color/fourth_color</item>
+    </style>
+
 </resources>
