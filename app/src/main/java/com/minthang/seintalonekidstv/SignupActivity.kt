@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_signup.*
 import java.lang.ref.Reference
 import java.util.*
@@ -23,6 +24,7 @@ class SignupActivity : AppCompatActivity() {
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
+    lateinit var alertDialog: SpotsDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,10 @@ class SignupActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         setContentView(R.layout.activity_signup)
+
+        alertDialog = SpotsDialog.Builder().setContext(this).setMessage("Please wait")
+            .setCancelable(false)
+            .build() as SpotsDialog
 
         firebaseAuth = FirebaseAuth.getInstance()
         btn_signup.setOnClickListener(){
@@ -84,6 +90,8 @@ class SignupActivity : AppCompatActivity() {
 
         firebaseAuth.createUserWithEmailAndPassword(user_email_regis.text.toString(), password_regis.text.toString()).addOnCompleteListener(this){
             task->
+            alertDialog.setMessage("Signing up")
+            alertDialog.show()
             if (task.isSuccessful){
                 val user: FirebaseUser = firebaseAuth.currentUser!!
                 val email = user.email!!
@@ -101,9 +109,11 @@ class SignupActivity : AppCompatActivity() {
                 databaseReference.child(uid).setValue(hashMap)
 
                 Toast.makeText(this@SignupActivity, "You have created an account", Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }else{
+                alertDialog.dismiss()
                 Toast.makeText(this@SignupActivity, "Authentication failed, error->"+task.result, Toast.LENGTH_SHORT).show()
                 //updateUI(null)
             }

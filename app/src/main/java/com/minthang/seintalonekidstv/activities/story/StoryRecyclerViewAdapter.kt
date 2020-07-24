@@ -1,9 +1,6 @@
 package com.minthang.seintalonekidstv.activities.story
 
-import android.app.Application
 import android.content.Intent
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +10,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.minthang.seintalonekidstv.R
+import com.minthang.seintalonekidstv.activities.VideoViewerActivity
+import com.minthang.seintalonekidstv.datamodels.StoryListData
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
@@ -29,12 +28,22 @@ class StoryRecyclerViewAdapter(private val StoryList: List<StoryListData>): Adap
 
         holder.itemView.setOnClickListener(){
             Toast.makeText(holder.itemView.context, currentItem.title, Toast.LENGTH_SHORT).show()
-            val sliderintent = Intent(holder.itemView.context, StorySliderActivity::class.java)
+
             //val storyListData = StoryListData(currentItem.thumbnail_url, currentItem.title, currentItem.summary)
             //storyListData.title = currentItem.title
             //sliderintent.putExtra("slideData", storyListData)
-            sliderintent.putExtra("story_id", currentItem.story_id)
-            holder.itemView.context.startActivity(sliderintent)
+
+            if (currentItem.story_id.startsWith("s")){
+                val sliderintent = Intent(holder.itemView.context, StorySliderActivity::class.java)
+                sliderintent.putExtra("story_id", currentItem.story_id)
+                holder.itemView.context.startActivity(sliderintent)
+            }else if (currentItem.story_id.startsWith("v")){
+                val sliderintent = Intent(holder.itemView.context, VideoViewerActivity::class.java)
+                sliderintent.putExtra("story_id", currentItem.story_id)
+                sliderintent.putExtra("parent", "English")
+                holder.itemView.context.startActivity(sliderintent)
+            }
+
         }
 
         holder.setVideo(currentItem.thumbnail_url, currentItem.title, currentItem.summary)

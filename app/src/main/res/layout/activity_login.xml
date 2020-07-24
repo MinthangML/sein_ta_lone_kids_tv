@@ -46,21 +46,32 @@
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <EditText
-        android:id="@+id/password_login"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_edit"
-        android:hint="Password"
-        android:textColorHint="@color/login_form_detail"
-        android:textColor="#fff"
-        android:drawableRight="@drawable/ic_eye"
-        android:padding="16dp"
-        android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/username_login" />
+        app:layout_constraintTop_toBottomOf="@+id/username_login"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#fff">
+
+        <EditText
+            android:id="@+id/password_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edit"
+            android:hint="Password"
+            android:textColorHint="@color/login_form_detail"
+            android:textColor="#fff"
+            android:padding="16dp"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:paddingLeft="10dp"
@@ -70,7 +81,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/password_login"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout"
         android:text="Login Now"
         android:background="@drawable/bg_btn"
         android:textAllCaps="false"

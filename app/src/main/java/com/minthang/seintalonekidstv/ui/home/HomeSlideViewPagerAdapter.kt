@@ -1,4 +1,4 @@
-package com.minthang.seintalonekidstv.activities.story.slides
+package com.minthang.seintalonekidstv.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import android.widget.Toast
 import androidx.viewpager.widget.PagerAdapter
 import com.minthang.seintalonekidstv.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.home_slide_list_image.view.*
 import kotlinx.android.synthetic.main.slide_list_image.view.*
 
-class SlideViewPagerAdapter(private val mContext: Context, private val dataList: List<SlideListData>): PagerAdapter() {
+class HomeSlideViewPagerAdapter(private val mContext: Context, private val dataList: List<HomeSlideListData>): PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
        return view === `object`
     }
@@ -22,14 +23,12 @@ class SlideViewPagerAdapter(private val mContext: Context, private val dataList:
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         //return super.instantiateItem(container, position)
         val inflater = LayoutInflater.from(mContext)
-        val layout = inflater.inflate(R.layout.slide_list_image, container, false) as ViewGroup
-
-        Toast.makeText(layout.context, "Item Initiated", Toast.LENGTH_SHORT).show()
+        val layout = inflater.inflate(R.layout.home_slide_list_image, container, false) as ViewGroup
 
         //layout.slideImageView
         try {
-            Toast.makeText(mContext, ""+dataList.get(position).slide_url, Toast.LENGTH_SHORT).show()
-            Picasso.get().load(dataList.get(position).slide_url).into(layout.slideImageView)
+            //Toast.makeText(mContext, ""+dataList.get(position).toString(), Toast.LENGTH_SHORT).show()
+            Picasso.get().load(dataList.get(position).slide_url).into(layout.homeSlideImage)
         }catch (e: Exception){
             Toast.makeText(mContext, ""+e.message, Toast.LENGTH_LONG).show()
         }
@@ -38,12 +37,8 @@ class SlideViewPagerAdapter(private val mContext: Context, private val dataList:
         return layout
     }
 
-
     override fun destroyItem(container: ViewGroup, position: Int, view: Any)
     {
-        Toast.makeText(container.context, "Item Destroyed", Toast.LENGTH_SHORT).show()
         container.removeView(view as View)
     }
-
-
 }

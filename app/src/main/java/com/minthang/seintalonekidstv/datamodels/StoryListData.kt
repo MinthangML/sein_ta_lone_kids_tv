@@ -1,9 +1,7 @@
-package com.minthang.seintalonekidstv.activities.story
+package com.minthang.seintalonekidstv.datamodels
 
-import android.app.Application
 import android.os.Parcel
 import android.os.Parcelable
-import android.widget.ImageView
 
 data class StoryListData(val story_id:String, val thumbnail_url: String, var title: String, val summary: String): Parcelable {
     constructor(parcel: Parcel) : this(

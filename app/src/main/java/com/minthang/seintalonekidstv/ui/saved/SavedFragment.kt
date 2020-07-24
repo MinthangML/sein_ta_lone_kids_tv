@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.minthang.seintalonekidstv.R
+import com.minthang.seintalonekidstv.adapters.VideosRecyclerViewAdapter
+import com.minthang.seintalonekidstv.datamodels.videoListData
 
 class SavedFragment : Fragment() {
 
@@ -34,7 +36,8 @@ class SavedFragment : Fragment() {
 
         //val exampleList = generateDummyList(100)
         val list = ArrayList<videoListData>()
-        val adapter = SavedRecyclerViewAdapter(list)
+        val adapter =
+            VideosRecyclerViewAdapter(list)
         val myrecyclerview: RecyclerView = root.findViewById(R.id.recycler_view_video)
         myrecyclerview.adapter = adapter
         myrecyclerview.layoutManager = LinearLayoutManager(context)
@@ -50,7 +53,12 @@ class SavedFragment : Fragment() {
                 Toast.makeText(this@SavedFragment.context, "Some thing has changed", Toast.LENGTH_SHORT).show()
                 list.clear()
                 for(ds in dataSnapshot.children){
-                    val item = videoListData(this@SavedFragment.requireActivity().application, ds.child("title").value.toString(), ds.child("link").value.toString())
+                    val item =
+                        videoListData(
+                            ds.child("title").value.toString(),
+                            ds.child("thumbnail").value.toString(),
+                            ds.child("link").value.toString(),
+                        ds.child("summary").value.toString())
                     list.add(item)
                 }
                 adapter.notifyDataSetChanged()

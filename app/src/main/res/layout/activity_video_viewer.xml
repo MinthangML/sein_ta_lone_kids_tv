@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".activities.VideoViewerActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:text="Videos"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbarlayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E1E1E1">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </ScrollView>
+<!--    <com.google.android.exoplayer2.ui.PlayerView-->
+<!--        android:id="@+id/videoViewAll"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#000"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/videoTitleAll"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:text="Title of video"-->
+<!--        android:textColor="#fff"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:layout_editor_absoluteX="5dp" />-->
+
+<!--    <View-->
+<!--        android:id="@+id/divider"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#C0BFBD"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/videoTitleAll"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="5dp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_recommended"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/divider"-->
+<!--            android:text="Recommended"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:fontFamily="@font/futuraheavy"/>-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recommended_recyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/text_recommended"/>-->
+<!--    <fragment-->
+<!--        android:id="@+id/fragmentOne"-->
+<!--        android:name="com.minthang.seintalonekidstv.activities.fragments.FragmentOne"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="210dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/fragmentTwo"-->
+<!--        android:name="com.minthang.seintalonekidstv.activities.fragments.FragmentTwo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/fragmentOne"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

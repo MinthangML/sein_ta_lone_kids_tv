@@ -4,91 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.MaterialComponents"
     tools:context=".ui.profile.ProfileFragment">
 
     <RelativeLayout
         android:id="@+id/profile_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="215dp"
+        android:background="@drawable/bg_login"
         tools:ignore="MissingConstraints">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="#6F0081">
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginTop="75dp"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp">
 
             <ImageView
                 android:id="@+id/avator"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_add_photo"
-                android:padding="5dp"/>
+                android:adjustViewBounds="true"
+                android:padding="5dp"
+                android:src="@drawable/icon1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textNameProfile"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_below="@id/avator"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/futurabook"
+                android:text="Min Thang"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textSize="25sp"
-                    android:textColor="#fff"/>
-
-                <TextView
-                    android:id="@+id/textEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="User Name"
-                    android:textColor="#fff"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Additional"
-                    android:textColor="#fff"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_fb_share"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ripple_effect"
+        android:text="Facebook"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        style="@style/MessengerButton.Blue.Large"
+        app:layout_constraintEnd_toStartOf="@id/btn_gg_share"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/profile_layout" />
 
     <Button
+        android:id="@+id/btn_gg_share"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/third_color"
+        android:text="Google"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_fb_share"
+        app:layout_constraintTop_toBottomOf="@id/profile_layout" />
+
+    <TextView
+        android:id="@+id/textEmailProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btn_fb_share"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRightProfile"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeftProfile"
+        android:background="@color/eight_color"
+        android:textColor="#fff"
+        android:text="thangpi4216@gmail.com"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
         android:layout_marginBottom="20dp"
+        android:text="Logout"
+        app:icon="@drawable/ic_search"
+        android:backgroundTint="@color/fifth_color"
+        android:textColor="#fff"
+        style="Widget.MaterialComponents.Button.TextButton.Icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="51dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRightProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="51dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

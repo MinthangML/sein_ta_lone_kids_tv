@@ -58,6 +58,7 @@
         app:iconTint="#C8FFFFFF"
         app:iconTintActive="#FFFFFF"
         app:menu="@menu/activity_main_drawer"
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
         app:layout_constraintBottom_toBottomOf="parent"/>
 <!--        app:duration="2"/>-->
 

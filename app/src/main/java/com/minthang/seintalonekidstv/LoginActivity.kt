@@ -1,6 +1,7 @@
 package com.minthang.seintalonekidstv
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -42,7 +43,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     }
 
     lateinit var mGoogleApiClient: GoogleApiClient      //google
-    lateinit var alertDialog: SpotsDialog             //google
+    lateinit var alertDialog: SpotsDialog             //ProgressDialog
 
     var firebaseAuth: FirebaseAuth?=null
     var callbackManager: CallbackManager?=null
@@ -61,6 +62,8 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 //        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login)
 
+
+
         configureGoogleClient()
 
         firebaseAuth = FirebaseAuth.getInstance()       //google & facebook
@@ -78,10 +81,14 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
         facebook_login.setReadPermissions("email")
         facebook_login.setOnClickListener(){
+            alertDialog.setMessage("Logging in with Facebook")
+            alertDialog.show()
             fb_login()
         }
 
         btn_googleLogin.setOnClickListener(){
+            alertDialog.setMessage("Logging in with Google")
+            alertDialog.show()
             google_login()
         }
 
@@ -107,21 +114,28 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             return
         }
 
+        alertDialog.setMessage("Logging in ")
+        alertDialog.show()
 
         firebaseAuth!!.signInWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnSuccessListener {authResult ->
+            alertDialog.dismiss()
             Toast.makeText(this@LoginActivity, "Login Successful "+authResult.user, Toast.LENGTH_LONG).show()
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))//MainActivity::class.java))
             finish()
         }.addOnFailureListener{e->
+            alertDialog.dismiss()
             Toast.makeText(this@LoginActivity, "Login Failed "+e.message, Toast.LENGTH_SHORT).show()
         }
-    }               ////default login
+    }
+    ////default login
 
+    //Google login intent started
     private fun google_login() {
         val intent: Intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
         startActivityForResult(intent, PERMISSION_CODE)
     }
 
+    //
     private fun configureGoogleClient() {
         val options: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail().build()
@@ -135,15 +149,18 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     private fun fb_login() {
         facebook_login.registerCallback(callbackManager, object:FacebookCallback<LoginResult>{
             override fun onSuccess(result: LoginResult?) {
+                alertDialog.dismiss()
                 handleFacebookAccessToken(result!!.accessToken)
                 //
             }
 
             override fun onCancel() {
+                alertDialog.dismiss()
                 Toast.makeText(applicationContext, "Cancel", Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(error: FacebookException?) {
+                alertDialog.dismiss()
                 Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
             }
         })
@@ -179,12 +196,14 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             val logged_activity = Intent(applicationContext, MainActivity::class.java)
             logged_activity.putExtra("email", email)
             Toast.makeText(this, ""+email, Toast.LENGTH_LONG).show()
+            //alertDialog.dismiss()
             startActivity(logged_activity)
             finish()
             Toast.makeText(this, "You logged with email : "+email, Toast.LENGTH_SHORT).show()
         }
     }
 
+    //Google login get back activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PERMISSION_CODE){                //google
@@ -232,9 +251,11 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
                 Toast.makeText(this, ""+email, Toast.LENGTH_LONG).show()
                 startActivity(logged_activity)
                 finish()
+                alertDialog.dismiss()
             }.addOnFailureListener{
                 e->
-                Toast.makeText(this, ""+e.message, Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+                Toast.makeText(this, "ErrorFiBGoGl"+e.message, Toast.LENGTH_SHORT).show()
             }
     }
 

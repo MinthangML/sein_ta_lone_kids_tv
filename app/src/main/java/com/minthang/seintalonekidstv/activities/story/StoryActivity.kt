@@ -3,14 +3,13 @@ package com.minthang.seintalonekidstv.activities.story
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.minthang.seintalonekidstv.R
-import com.minthang.seintalonekidstv.ui.saved.SavedRecyclerViewAdapter
-import com.minthang.seintalonekidstv.ui.saved.videoListData
+import com.minthang.seintalonekidstv.datamodels.StoryListData
+import kotlinx.android.synthetic.main.activity_story.*
 import www.sanju.motiontoast.MotionToast
 
 class StoryActivity : AppCompatActivity() {
@@ -31,6 +30,7 @@ class StoryActivity : AppCompatActivity() {
         firebaseDatabase = FirebaseDatabase.getInstance()
         val cardId: String = intent.getStringExtra("cardId")!!
         databaseReference = firebaseDatabase.reference.child(cardId)
+        toolbarTitle.text = cardId
 
         val list = ArrayList<StoryListData>()
         val adapter = StoryRecyclerViewAdapter(list)
@@ -52,7 +52,13 @@ class StoryActivity : AppCompatActivity() {
                 list.clear()
 
                 for(ds in dataSnapshot.children){
-                    val item = StoryListData(ds.child("id").value.toString(), ds.child("thumbnail").value.toString(), ds.child("title").value.toString(), ds.child("summary").value.toString())
+                    val item =
+                        StoryListData(
+                            ds.child("id").value.toString(),
+                            ds.child("thumbnail").value.toString(),
+                            ds.child("title").value.toString(),
+                            ds.child("summary").value.toString()
+                        )
                     list.add(item)
                 }
                 adapter.notifyDataSetChanged()

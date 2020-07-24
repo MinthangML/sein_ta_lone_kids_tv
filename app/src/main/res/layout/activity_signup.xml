@@ -61,37 +61,56 @@
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/username_regis" />
 
-    <EditText
-        android:id="@+id/password_regis"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_edit"
-        android:hint="Password"
-        android:textColorHint="@color/login_form_detail"
-        android:textColor="#fff"
-        android:drawableRight="@drawable/ic_eye"
-        android:padding="16dp"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/user_email_regis" />
 
-    <EditText
-        android:id="@+id/confrm_password"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutSigninPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_edit"
-        android:hint="Confirm Password"
-        android:textColorHint="@color/login_form_detail"
-        android:textColor="#fff"
-        android:drawableRight="@drawable/ic_eye"
-        android:padding="16dp"
-        android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/password_regis"/>
+        app:layout_constraintTop_toBottomOf="@+id/user_email_regis"
+        app:passwordToggleEnabled="true"
+        app:hintTextColor="@android:color/transparent"
+        android:textColorHint="#fff">
+
+        <EditText
+            android:id="@+id/password_regis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edit"
+            android:hint="Password"
+            android:textColorHint="#fff"
+            android:textColor="#fff"
+            android:padding="16dp"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textInputLayoutSigninPwdConfrm"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutSigninPassword"
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#fff">
+
+        <EditText
+            android:id="@+id/confrm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edit"
+            android:hint="Confirm Password"
+            android:textColorHint="@color/login_form_detail"
+            android:textColor="#fff"
+            android:drawableRight="@drawable/ic_eye"
+            android:padding="16dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/btn_signup"
@@ -100,7 +119,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/confrm_password"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutSigninPwdConfrm"
         android:text="SignUp Now"
         android:background="@drawable/bg_btn"
         android:textAllCaps="false"

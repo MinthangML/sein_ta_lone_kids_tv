@@ -62,8 +62,8 @@ class ProfileFragment : Fragment() {
 //        })
 
         imageAvator = root.findViewById(R.id.avator)
-        textName = root.findViewById(R.id.textName)
-        textEmail = root.findViewById(R.id.textEmail)
+        textName = root.findViewById(R.id.textNameProfile)
+        textEmail = root.findViewById(R.id.textEmailProfile)
         btnLogout = root.findViewById(R.id.btnLogout)
 
         var query: Query = databaseReference.orderByChild("email").equalTo(user.email)

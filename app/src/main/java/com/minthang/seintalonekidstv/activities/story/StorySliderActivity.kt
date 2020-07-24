@@ -1,28 +1,23 @@
 package com.minthang.seintalonekidstv.activities.story
 
-import android.content.Intent
+import android.content.Context
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
+import android.provider.MediaStore
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.*
-import com.minthang.seintalonekidstv.LoginActivity
-import com.minthang.seintalonekidstv.MainActivity
 import com.minthang.seintalonekidstv.R
 import com.minthang.seintalonekidstv.activities.story.slides.SlideListData
 import com.minthang.seintalonekidstv.activities.story.slides.SlideViewPagerAdapter
-import com.minthang.seintalonekidstv.ui.saved.videoListData
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_story_slider.*
-import java.lang.System.load
-import java.util.*
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 class StorySliderActivity : AppCompatActivity() {
@@ -30,8 +25,9 @@ class StorySliderActivity : AppCompatActivity() {
     lateinit var slideViewAdapter: SlideViewPagerAdapter
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var databaseReference: DatabaseReference
-    var position: Int = 0
-
+    lateinit var mediaPlayer: MediaPlayer
+    var positionpage: Int = 0
+    val audioMainUrl: String = "https://firebasestorage.googleapis.com/v0/b/sein-ta-lone-kids-tv.appspot.com/o/audios%2Fsong2.mp3?alt=media&token=44088b33-1333-49c7-86bc-3ada0e5fc2ab"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,6 +47,8 @@ class StorySliderActivity : AppCompatActivity() {
 //            Picasso.get().load(R.drawable.ic_add_photo).into(story_thumbnail)
 //            Toast.makeText(applicationContext, ""+e.message, Toast.LENGTH_LONG).show()
 //        }
+        mediaPlayer = MediaPlayer()
+        //prepareMediaPlayer(mediaPlayer, audioMainUrl)
 
         val story_id: String = intent.getStringExtra("story_id")!!
 
@@ -60,6 +58,7 @@ class StorySliderActivity : AppCompatActivity() {
         databaseReference = firebaseDatabase.reference.child("Stories").child(story_id).child("slides")
 
         val list = ArrayList<SlideListData>()
+        val audioUrl = ArrayList<String>()
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -67,12 +66,14 @@ class StorySliderActivity : AppCompatActivity() {
 
                 Toast.makeText(applicationContext, "Some thing has changed", Toast.LENGTH_SHORT).show()
                 list.clear()
+                audioUrl.clear()
                 for(ds in dataSnapshot.children){
-                    val item = SlideListData(ds.value.toString())
+                    val item = SlideListData(ds.child("imgurl").value.toString(), ds.child("audiourl").value.toString())
                     list.add(item)
+                    audioUrl.add(item.audio_url)
                 }
 
-                Toast.makeText(applicationContext, "List=$list", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "Audio URL=$audioMainUrl", Toast.LENGTH_SHORT).show()
                 slideViewAdapter.notifyDataSetChanged()
             }
 
@@ -81,7 +82,6 @@ class StorySliderActivity : AppCompatActivity() {
                 // ...
             }
         }
-
         databaseReference.addValueEventListener(postListener)
 
         slideViewAdapter = SlideViewPagerAdapter(this, list)
@@ -90,35 +90,80 @@ class StorySliderActivity : AppCompatActivity() {
         story_tab_slide.setupWithViewPager(viewPager)
 
         button2.setOnClickListener(){
-            position = viewPager.currentItem
+            positionpage = viewPager.currentItem
 
-            if (position == list.size){
-                position = 0
+            if (positionpage == list.size){
+                positionpage = 0
+                viewPager.currentItem = positionpage
             }
             
-            if (position < list.size){
-                position++
-                viewPager.setCurrentItem(position)
+            if (positionpage < list.size){
+                positionpage++
+                viewPager.currentItem = positionpage
             }
         }
 
-        //The following code is important for timer
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
-//        val handler = Handler()
-//        val Update = Runnable {
-//            if (position == list.size) {
-//                position = 0
-//            }
-//
-//            viewPager.setCurrentItem(position++, true)
-//        }
-//        val swipeTimer = Timer()
-//        swipeTimer.schedule(object : TimerTask() {
-//            override fun run() {
-//                handler.post(Update)
-//            }
-//        }, 1000, 1000)
+            override fun onPageScrollStateChanged(state: Int) {
+                //To implement
+            }
 
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+//                   Not Implemented yet
+            }
+
+            override fun onPageSelected(position: Int) {
+                Toast.makeText(applicationContext, "Position: $position, "+audioUrl[position], Toast.LENGTH_SHORT).show()
+//                val mediaPlayer2 = MediaPlayer.create(applicationContext, Uri.parse(audioMainUrl))
+//                mediaPlayer2.prepare()
+//                mediaPlayer2.start()
+//                mediaPlayer2.release()
+                if (mediaPlayer.isPlaying){
+                    mediaPlayer.stop()
+                    mediaPlayer.release()
+                }
+
+                mediaPlayer = MediaPlayer()
+                prepareMediaPlayer(mediaPlayer, list[position].audio_url)
+                mediaPlayer.start()
+
+            }
+        })
+    } //end of onCreate fun
+
+    //Preparing MediaPlayer for to play audio
+    private fun prepareMediaPlayer(player: MediaPlayer, url: String){
+        try{
+            player.apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
+            }
+            player.setDataSource(url)
+            player.prepare()
+        }catch (e: Exception){
+            Toast.makeText(applicationContext, "Music Error: "+e.message+" url=$String", Toast.LENGTH_SHORT).show()
+        }
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        mediaPlayer.start()
+//    }
+//
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer.stop()
+        mediaPlayer.release()
+    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        mediaPlayer.start()
+//    }
 }
 
